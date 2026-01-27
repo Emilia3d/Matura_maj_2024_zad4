@@ -66,5 +66,24 @@ int main() {
  
     cout << najw101 << endl;
 
+    cout << "4.3 " << endl;//poprawić
+    int licznik1 = 0;
+
+    for (int liczba2 : liczby1) {
+        bool flaga = true;
+        vector<int> czynnikiLiczby = rozkladNaPierwsze(liczba2);
+
+        for (int czynnik : czynnikiLiczby) {
+            if (count(czynnikiLiczby.begin(), czynnikiLiczby.end(), czynnik) > count(liczby1.begin(), liczby1.end(), czynnik)) {
+                flaga = false;
+                break;
+            }
+        }
+
+        if (flaga) {
+            cout << liczba2 << endl;
+        }
+    }
+
    return 0;
 }
