@@ -47,13 +47,12 @@ int main() {
 
     int licznik = 0;
 
-    // Sprawdzanie podzielności
+
     for (int liczba1 : liczby1) {
         for (int liczba2 : liczby2) {
             if (liczba2 % liczba1 == 0) {
                 licznik++;
-                break; // Przerwij wewnętrzną pętlę, gdy znajdziesz podzielną liczbę
-            }
+                break;             }
         }
     }
     cout << licznik << endl;
@@ -69,19 +68,21 @@ int main() {
     cout << "4.3 " << endl;//poprawić
     int licznik1 = 0;
 
-    for (int liczba2 : liczby1) {
-        bool flaga = true;
-        vector<int> czynnikiLiczby = rozkladNaPierwsze(liczba2);
+    sort(liczby1.begin(), liczby1.end());
+    vector<int> kopia1 = liczby1;
+    vector<long long> kopia2 = liczby2;
 
-        for (int czynnik : czynnikiLiczby) {
-            if (count(czynnikiLiczby.begin(), czynnikiLiczby.end(), czynnik) > count(liczby1.begin(), liczby1.end(), czynnik)) {
-                flaga = false;
-                break;
+    for (int j = 0; j < liczby2.size(); j++) {
+        liczby1 = kopia1;
+        for (int i = 0; i < liczby1.size(); i++) {
+            if (liczby2[j] % liczby1[i] == 0) {
+                liczby2[j] /= liczby1[i];
+                liczby1.erase(liczby1.begin() + i);
+                i--; // cofamy indeks
             }
         }
-
-        if (flaga) {
-            cout << liczba2 << endl;
+        if (liczby2[j] == 1) {
+            cout << kopia2[j]<<endl;
         }
     }
 
