@@ -5,13 +5,13 @@
 
 using namespace std;
 
- fstream plik("liczby.txt");
- const int N1 = 3000;
- const int N2 = 20;
+ //fstream plik("liczby.txt");
+ //const int N1 = 3000;
+ //const int N2 = 20;
 
-//fstream plik("liczby_przyklad.txt");
-//const int N1 = 200;
-//const int N2 = 20;
+fstream plik("liczby_przyklad.txt");
+const int N1 = 200;
+const int N2 = 20;
 
  vector<int> rozkladNaPierwsze(int liczba) {
      vector<int> czynniki;
@@ -28,13 +28,14 @@ using namespace std;
 int main() {
     vector<int> liczby1;
     vector<long long> liczby2;
-
+    
     // Wczytanie N1 liczb z pierwszego wiersza
     for (int i = 0; i < N1; i++) {
         int x;
         plik >> x;
         liczby1.push_back(x);
     }
+    vector<int> kopia4_4 = liczby1;
 
     // Wczytanie N2 liczb z drugiego wiersza
     for (int i = 0; i < N2; i++) {
@@ -65,7 +66,7 @@ int main() {
  
     cout << najw101 << endl;
 
-    cout << "4.3 " << endl;//poprawić
+    cout << "4.3 " << endl;
     int licznik1 = 0;
 
     sort(liczby1.begin(), liczby1.end());
@@ -85,6 +86,21 @@ int main() {
             cout << kopia2[j]<<endl;
         }
     }
+    cout << "4.4 " << endl;
+
+    liczby1 = kopia4_4;
+    double srednia = 0;
+    long long suma50 = 0;
+
+    for (int i = 0; i < liczby1.size(); i++) {
+        for (int j = 0; j < 50; j++) {
+            suma50 += liczby1[i];
+            srednia = suma50 / 50;
+        }
+        cout << srednia<<endl;
+    }
+
+
 
    return 0;
 }
