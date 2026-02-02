@@ -5,13 +5,13 @@
 
 using namespace std;
 
- //fstream plik("liczby.txt");
- //const int N1 = 3000;
- //const int N2 = 20;
+ fstream plik("liczby.txt");
+ const int N1 = 3000;
+ const int N2 = 20;
 
-fstream plik("liczby_przyklad.txt");
-const int N1 = 200;
-const int N2 = 20;
+//fstream plik("liczby_przyklad.txt");
+//const int N1 = 200;
+//const int N2 = 20;
 
  vector<int> rozkladNaPierwsze(int liczba) {
      vector<int> czynniki;
@@ -25,82 +25,97 @@ const int N2 = 20;
      return czynniki;
  }
 
-int main() {
-    vector<int> liczby1;
-    vector<long long> liczby2;
-    
-    // Wczytanie N1 liczb z pierwszego wiersza
-    for (int i = 0; i < N1; i++) {
-        int x;
-        plik >> x;
-        liczby1.push_back(x);
-    }
-    vector<int> kopia4_4 = liczby1;
+ int main() {
+     vector<int> liczby1;
+     vector<long long> liczby2;
 
-    // Wczytanie N2 liczb z drugiego wiersza
-    for (int i = 0; i < N2; i++) {
-        long long y;
-        plik >> y;
-        liczby2.push_back(y);
-    }
+     // Wczytanie N1 liczb z pierwszego wiersza
+     for (int i = 0; i < N1; i++) {
+         int x;
+         plik >> x;
+         liczby1.push_back(x);
+     }
+     vector<int> kopia4_4 = liczby1;
 
-    cout << 4.1 << endl;
+     // Wczytanie N2 liczb z drugiego wiersza
+     for (int i = 0; i < N2; i++) {
+         long long y;
+         plik >> y;
+         liczby2.push_back(y);
+     }
 
-    int licznik = 0;
+     cout << 4.1 << endl;
 
+     int licznik = 0;
 
-    for (int liczba1 : liczby1) {
-        for (int liczba2 : liczby2) {
-            if (liczba2 % liczba1 == 0) {
-                licznik++;
-                break;             }
-        }
-    }
-    cout << licznik << endl;
+     for (int liczba1 : liczby1) {
+         for (int liczba2 : liczby2) {
+             if (liczba2 % liczba1 == 0) {
+                 licznik++;
+                 break;
+             }
+         }
+     }
+     cout << licznik << endl;
 
-    cout << "4.2 " << endl;
-    vector<int> kopia = liczby1;
-    sort(kopia.rbegin(), kopia.rend());
-    
-    int najw101 = kopia[101]; 
- 
-    cout << najw101 << endl;
+     cout << "4.2 " << endl;
+     vector<int> kopia = liczby1;
+     sort(kopia.rbegin(), kopia.rend());
 
-    cout << "4.3 " << endl;
-    int licznik1 = 0;
+     int najw101 = kopia[101];
 
-    sort(liczby1.begin(), liczby1.end());
-    vector<int> kopia1 = liczby1;
-    vector<long long> kopia2 = liczby2;
+     cout << najw101 << endl;
 
-    for (int j = 0; j < liczby2.size(); j++) {
-        liczby1 = kopia1;
-        for (int i = 0; i < liczby1.size(); i++) {
-            if (liczby2[j] % liczby1[i] == 0) {
-                liczby2[j] /= liczby1[i];
-                liczby1.erase(liczby1.begin() + i);
-                i--; // cofamy indeks
-            }
-        }
-        if (liczby2[j] == 1) {
-            cout << kopia2[j]<<endl;
-        }
-    }
-    cout << "4.4 " << endl;
+     cout << "4.3 " << endl;
+     int licznik1 = 0;
 
-    liczby1 = kopia4_4;
-    double srednia = 0;
-    long long suma50 = 0;
+     sort(liczby1.begin(), liczby1.end());
+     vector<int> kopia1 = liczby1;
+     vector<long long> kopia2 = liczby2;
 
-    for (int i = 0; i < liczby1.size(); i++) {
-        for (int j = 0; j < 50; j++) {
-            suma50 += liczby1[i];
-            srednia = suma50 / 50;
-        }
-        cout << srednia<<endl;
-    }
+     for (int j = 0; j < liczby2.size(); j++) {
+         liczby1 = kopia1;
+         for (int i = 0; i < liczby1.size(); i++) {
+             if (liczby2[j] % liczby1[i] == 0) {
+                 liczby2[j] /= liczby1[i];
+                 liczby1.erase(liczby1.begin() + i);
+                 i--; // cofamy indeks
+             }
+         }
+         if (liczby2[j] == 1) {
+             cout << kopia2[j] << endl;
+         }
+     }
+     cout << "4.4 " << endl;
 
+     liczby1 = kopia4_4;
 
+     double maxSr = 0;
+     long long suma = 0;
 
-   return 0;
+     int maxDl = 0;
+     int pierw = 0;
+
+     for (int i = 0; i < liczby1.size(); i++) {
+         suma = 0;
+
+         for (int j = i; j < liczby1.size(); j++) {
+             suma += liczby1[j];
+             int dl = j - i + 1;
+
+             if (dl >= 50) {
+                 double sr = suma / (double)dl;
+
+                 if (sr > maxSr) {
+                     maxSr = sr;
+                     maxDl = dl;
+                     pierw = liczby1[i];
+                 }
+             }
+         }
+     }
+
+     cout << maxSr << " " << maxDl << " " << pierw << endl;
+
+    return 0;
 }
